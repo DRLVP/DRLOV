@@ -56,11 +56,6 @@ body {
   color: #b31a38;
 }
 
-.blur__header {
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-}
-
 /************************* 
   HEADER SECTION STYLING
 *************************/

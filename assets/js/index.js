@@ -1,10 +1,8 @@
 let header = document.querySelector("header");
 let menu = document.querySelector("#open-menu");
 let navbar = document.querySelector("#nav-menu");
+const navLinks = document.querySelectorAll("#nav-menu li a")
 
-window.addEventListener("scroll", () => {
-  header.classList.toggle("blur__header", window.scrollY > 50);
-});
 
 menu.onclick = () => {
   navbar.classList.toggle("active");
@@ -12,7 +10,6 @@ menu.onclick = () => {
 window.onscroll = () => {
   navbar.classList.remove("active");
 };
-
 //======== Dark Mode / light mode========
 let darkmode = document.querySelector("#darkmode");
 
@@ -47,3 +44,13 @@ if (navClose) {
     navMenu.classList.remove('show-menu');
   })
 };
+
+navLinks.forEach((link)=>{
+  link.addEventListener("click", hideMenu)
+})
+
+darkmode.addEventListener("click", hideMenu)
+
+function hideMenu(){
+  navMenu.classList.remove("show-menu")
+}

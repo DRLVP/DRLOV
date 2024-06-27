@@ -264,15 +264,11 @@
       justify-content: space-between;
 
       .skill__bars {
-        width: 50%;
+        width: 100%;
 
         .bars__box {
           padding: .5rem;
         }
-      }
-
-      & .skills__img {
-        width: 45%;
       }
     }
   }

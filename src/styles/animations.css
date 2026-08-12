@@ -1,0 +1,69 @@
+/* Glow effects */
+.glow-purple {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: var(--accent-purple);
+  filter: blur(100px);
+  opacity: 0.15;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.glow-blue {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: var(--accent-blue);
+  filter: blur(100px);
+  opacity: 0.15;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes float-subtle {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-subtle {
+  animation: float-subtle 4s ease-in-out infinite;
+}
+
+/* Typewriter Cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background-color: var(--accent-purple);
+  margin-left: 4px;
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Reveal classes for GSAP */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.reveal-fade {
+  opacity: 0;
+}

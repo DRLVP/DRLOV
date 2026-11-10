@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { FaGithub, FaLinkedin, FaInstagram, FaFacebook, FaXTwitter } from 'react-icons/fa6'
+import { FaGithub, FaLinkedin, FaXTwitter } from 'react-icons/fa6'
 import { gsap } from 'gsap'
 import Hero3D from './Hero3D'
 
@@ -36,71 +36,105 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="home" ref={containerRef} style={{
-      minHeight: '100vh',
-      display: 'flex',
-      alignItems: 'center',
-      position: 'relative'
-    }}>
+    <section id="home" ref={containerRef} className="hero-section">
       {/* Background Glows */}
       <div className="glow-purple" style={{ top: '20%', right: '10%' }}></div>
       <div className="glow-blue" style={{ bottom: '10%', left: '10%' }}></div>
 
-      <div className="container" style={{ width: '100%', position: 'relative', zIndex: 10, display: 'flex' }}>
+      <div className="container hero-container">
 
-        {/* Social Icons (Vertical) */}
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem',
-          marginRight: '3rem',
-          justifyContent: 'center'
-        }}>
-          <a href="https://github.com/DRLVP" className="social-icon" target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'all 0.3s' }} onMouseOver={e => e.target.style.color = 'var(--accent-purple)'} onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}><FaGithub /></a>
-          <a href="https://www.linkedin.com/in/durlov-phukon/" className="social-icon" target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'all 0.3s' }} onMouseOver={e => e.target.style.color = 'var(--accent-purple)'} onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}><FaLinkedin /></a>
-          <a href="https://x.com/drlovphukn" className="social-icon" target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'all 0.3s' }} onMouseOver={e => e.target.style.color = 'var(--accent-purple)'} onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}><FaXTwitter /></a>
+        {/* Social Icons */}
+        <div className="hero-socials">
+          <a
+            href="https://github.com/DRLVP"
+            className="social-icon"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub Profile"
+            style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'all 0.3s' }}
+            onMouseOver={e => e.currentTarget.style.color = 'var(--accent-purple)'}
+            onMouseOut={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+          >
+            <FaGithub />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/durlov-phukon/"
+            className="social-icon"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn Profile"
+            style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'all 0.3s' }}
+            onMouseOver={e => e.currentTarget.style.color = 'var(--accent-purple)'}
+            onMouseOut={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+          >
+            <FaLinkedin />
+          </a>
+          <a
+            href="https://x.com/drlovphukn"
+            className="social-icon"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="X (Twitter) Profile"
+            style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'all 0.3s' }}
+            onMouseOver={e => e.currentTarget.style.color = 'var(--accent-purple)'}
+            onMouseOut={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+          >
+            <FaXTwitter />
+          </a>
         </div>
 
         {/* Text Content */}
-        <div style={{ maxWidth: '600px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div className="hero-content">
           <span className="hero-subtitle-small" style={{
             fontFamily: 'var(--font-mono)',
             color: 'var(--accent-blue)',
-            fontSize: '1rem',
-            marginBottom: '1rem',
+            fontSize: 'clamp(0.85rem, 2vw, 1rem)',
+            marginBottom: '0.75rem',
             letterSpacing: '0.1em'
           }}>Hello, I am</span>
 
           <h1 className="hero-title" style={{
-            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+            fontSize: 'clamp(2.2rem, 6vw, 4.5rem)',
             lineHeight: 1.1,
             fontWeight: 700,
             marginBottom: '1rem',
             background: 'linear-gradient(to right, #ffffff, #a855f7)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            letterSpacing: '-0.02em'
-          }}>DURLOV PHUKON <br /><span style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', color: 'var(--text-secondary)', fontWeight: 500 }}>(DRLOVE)</span></h1>
+            letterSpacing: '-0.02em',
+            wordBreak: 'break-word'
+          }}>
+            DURLOV PHUKON <br />
+            <span style={{ fontSize: 'clamp(1.3rem, 4vw, 2.5rem)', color: 'var(--text-secondary)', fontWeight: 500 }}>
+              (DRLOVE)
+            </span>
+          </h1>
 
           <h2 className="hero-subtitle-large" style={{
             fontFamily: 'var(--font-body)',
-            fontSize: 'clamp(1.2rem, 2vw, 1.8rem)',
+            fontSize: 'clamp(1.05rem, 3vw, 1.8rem)',
             color: 'var(--text-secondary)',
             fontWeight: 500,
-            marginBottom: '0.5rem'
+            marginBottom: '0.5rem',
+            lineHeight: 1.4
           }}>
             Full-Stack Software Developer | Creative Entrepreneur<span className="typewriter-cursor"></span>
           </h2>
 
           <p style={{
             fontFamily: 'var(--font-mono)',
-            fontSize: '1rem',
+            fontSize: 'clamp(0.85rem, 2vw, 1rem)',
             color: 'var(--accent-blue)',
-            marginBottom: '2rem'
+            marginBottom: '1.75rem'
           }}>📍 Lakwa, Sivasagar, Assam</p>
 
           <div className="hero-btn">
-            <a href="https://drive.google.com/file/d/1W90J_94c9uiIiG-IIjdNtgt74UCy7iWT/view?usp=sharing" target="_blank" rel="noreferrer" className="btn-primary">
+            <a
+              href="https://drive.google.com/file/d/1S8ztQVaOrxZFD3ev4E3fkVkVzozTn4bU/view?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+              className="btn-primary"
+            >
               Download CV
             </a>
           </div>

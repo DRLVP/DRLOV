@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { TorusKnot } from '@react-three/drei'
 import * as THREE from 'three'
@@ -30,12 +30,23 @@ function AnimatedTorusKnot() {
 }
 
 export default function Hero3D() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
-    <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, right: 0, zIndex: 1 }}>
+    <div className="hero-3d-box">
       <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />
-        <group position={[1.5, 0, 0]}>
+        <group position={isMobile ? [0, 0.2, -1.2] : [1.5, 0, 0]}>
           <AnimatedTorusKnot />
         </group>
       </Canvas>

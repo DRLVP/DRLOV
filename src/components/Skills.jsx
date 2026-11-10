@@ -45,10 +45,12 @@ export default function Skills() {
 
   useEffect(() => {
     const el = sectionRef.current
+    if (!el) return
+
     gsap.fromTo(el.querySelectorAll('.skill-card'),
       { y: 50, opacity: 0 },
       {
-        y: 0, opacity: 1, duration: 0.6, stagger: 0.05, ease: 'back.out(1.7)', scrollTrigger: {
+        y: 0, opacity: 1, duration: 0.6, stagger: 0.04, ease: 'back.out(1.7)', scrollTrigger: {
           trigger: el, start: 'top 80%'
         }
       }
@@ -63,27 +65,13 @@ export default function Skills() {
           <span>My Toolkit</span>
         </div>
 
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1.5rem',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
+        <div className="skills-wrapper">
           {skillsList.map((skill, index) => (
-            <div key={index} className="skill-card glass-panel" style={{
-              width: '120px',
-              height: '120px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              padding: '1rem',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer'
-            }}
+            <div
+              key={index}
+              className="skill-card skill-card-item glass-panel"
               onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-10px) scale(1.05)'
+                e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)'
                 e.currentTarget.style.borderColor = 'var(--accent-purple)'
                 e.currentTarget.style.boxShadow = '0 10px 20px rgba(168, 85, 247, 0.2)'
               }}
@@ -97,20 +85,17 @@ export default function Skills() {
                 <img
                   src={`/img/${skill.icon}`}
                   alt={skill.name}
+                  loading="lazy"
                   style={{
-                    width: '50px',
-                    height: '50px',
-                    objectFit: 'contain',
-                    marginBottom: '0.8rem',
                     filter: skill.invert ? 'invert(1)' : 'none'
                   }}
                 />
               ) : skill.name.toLowerCase().includes('seo') ? (
-                <TbSeo style={{ fontSize: '3rem', color: 'var(--accent-purple)', marginBottom: '0.8rem' }} />
+                <TbSeo style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', color: 'var(--accent-purple)', marginBottom: '0.6rem' }} />
               ) : (
-                <FaCode style={{ fontSize: '3rem', color: 'var(--accent-purple)', marginBottom: '0.8rem' }} />
+                <FaCode style={{ fontSize: 'clamp(2rem, 6vw, 3rem)', color: 'var(--accent-purple)', marginBottom: '0.6rem' }} />
               )}
-              <span style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', textAlign: 'center' }}>{skill.name}</span>
+              <span>{skill.name}</span>
             </div>
           ))}
         </div>

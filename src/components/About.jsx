@@ -10,18 +10,32 @@ export default function About() {
 
   useEffect(() => {
     const el = sectionRef.current
-    gsap.fromTo(el.querySelector('.about-img'),
-      { x: -50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: {
-        trigger: el, start: 'top 70%'
-      }}
-    )
-    gsap.fromTo(el.querySelector('.about-content'),
-      { x: 50, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: {
-        trigger: el, start: 'top 70%'
-      }}
-    )
+    if (!el) return
+
+    const imgEl = el.querySelector('.about-img-box')
+    const contentEl = el.querySelector('.about-content')
+
+    if (imgEl) {
+      gsap.fromTo(imgEl,
+        { x: -50, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: {
+            trigger: el, start: 'top 75%'
+          }
+        }
+      )
+    }
+
+    if (contentEl) {
+      gsap.fromTo(contentEl,
+        { x: 50, opacity: 0 },
+        {
+          x: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: {
+            trigger: el, start: 'top 75%'
+          }
+        }
+      )
+    }
   }, [])
 
   return (
@@ -32,28 +46,28 @@ export default function About() {
           <span>Introduction</span>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '4rem',
-          alignItems: 'center'
-        }}>
+        <div className="about-grid">
           
-          <div className="about-img" style={{ position: 'relative' }}>
+          <div className="about-img-box">
             <div className="glow-purple" style={{ top: '-10%', left: '-10%' }}></div>
-            <img src="/img/about.png" alt="About Durlov" style={{
-              width: '100%',
-              borderRadius: '1rem',
-              position: 'relative',
-              zIndex: 2,
-              boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
-              border: '1px solid var(--glass-border)'
-            }} />
+            <img
+              src="/img/about.png"
+              alt="About Durlov"
+              style={{
+                width: '100%',
+                borderRadius: '1rem',
+                position: 'relative',
+                zIndex: 2,
+                boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+                border: '1px solid var(--glass-border)',
+                display: 'block'
+              }}
+            />
           </div>
 
           <div className="about-content">
             <p style={{
-              fontSize: '1.1rem',
+              fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
               color: 'var(--text-secondary)',
               marginBottom: '2rem',
               lineHeight: 1.8
@@ -61,22 +75,22 @@ export default function About() {
               I am a Full-Stack Software Developer & Creative Entrepreneur based in Assam. With a strong foundation in modern web and mobile technologies, I specialize in building end-to-end applications that drive business value. From conceptualizing hyper-local delivery apps like Suvega Now to developing privacy-first web utilities, I manage the complete product lifecycle including architecture, deployment, and SEO optimization.
             </p>
 
-            <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                <FaUser style={{ color: 'var(--accent-blue)', fontSize: '1.2rem' }} />
-                <span style={{ fontFamily: 'var(--font-mono)' }}>Durlov Phukon</span>
+            <div className="glass-panel about-info-panel">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                <FaUser style={{ color: 'var(--accent-blue)', fontSize: '1.2rem', flexShrink: 0 }} />
+                <span style={{ fontFamily: 'var(--font-mono)', wordBreak: 'break-word' }}>Durlov Phukon</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                <FaPhone style={{ color: 'var(--accent-blue)', fontSize: '1.2rem' }} />
-                <span style={{ fontFamily: 'var(--font-mono)' }}>+91 6002017913</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+                <FaPhone style={{ color: 'var(--accent-blue)', fontSize: '1.2rem', flexShrink: 0 }} />
+                <span style={{ fontFamily: 'var(--font-mono)', wordBreak: 'break-word' }}>+91 6002017913</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <FaEnvelope style={{ color: 'var(--accent-blue)', fontSize: '1.2rem' }} />
-                <span style={{ fontFamily: 'var(--font-mono)' }}>phukondurlov45@gmail.com</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                <FaEnvelope style={{ color: 'var(--accent-blue)', fontSize: '1.2rem', flexShrink: 0 }} />
+                <span style={{ fontFamily: 'var(--font-mono)', wordBreak: 'break-all' }}>phukondurlov45@gmail.com</span>
               </div>
             </div>
 
-            <div className="glass-panel" style={{ padding: '2rem', marginBottom: '2rem' }}>
+            <div className="glass-panel about-info-panel">
               <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--accent-purple)' }}>Education & Certifications</h3>
               <ul style={{ listStyleType: 'disc', paddingLeft: '1.5rem', marginBottom: '1.5rem', color: 'var(--text-secondary)' }}>
                 <li>Bachelor's Degree (Geography Honors) – Nazira College (2020)</li>
@@ -89,9 +103,16 @@ export default function About() {
               </ul>
             </div>
 
-            <a href="https://drive.google.com/file/d/1S8ztQVaOrxZFD3ev4E3fkVkVzozTn4bU/view?usp=sharing" target="_blank" rel="noreferrer" className="btn-primary">
-              Download CV
-            </a>
+            <div>
+              <a
+                href="https://drive.google.com/file/d/1S8ztQVaOrxZFD3ev4E3fkVkVzozTn4bU/view?usp=sharing"
+                target="_blank"
+                rel="noreferrer"
+                className="btn-primary"
+              >
+                Download CV
+              </a>
+            </div>
           </div>
 
         </div>

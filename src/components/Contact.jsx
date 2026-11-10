@@ -9,11 +9,15 @@ export default function Contact() {
 
   useEffect(() => {
     const el = sectionRef.current
+    if (!el) return
+
     gsap.fromTo(el.querySelector('.contact-form'),
       { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: {
-        trigger: el, start: 'top 80%'
-      }}
+      {
+        y: 0, opacity: 1, duration: 1, ease: 'power3.out', scrollTrigger: {
+          trigger: el, start: 'top 80%'
+        }
+      }
     )
   }, [])
 
@@ -33,83 +37,58 @@ export default function Contact() {
           {/* Background Glow */}
           <div className="glow-purple" style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)', opacity: 0.1 }}></div>
 
-          <div className="contact-form glass-panel" style={{
-            width: '100%',
-            maxWidth: '600px',
-            padding: '3rem',
-            position: 'relative',
-            zIndex: 2
-          }}>
+          <div className="contact-form contact-form-container glass-panel">
             <form action="https://formspree.io/f/moqojrva" method="POST" style={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.5rem'
+              gap: '1.25rem'
             }}>
-              <input 
-                type="text" 
-                name="name" 
-                placeholder="Your Name" 
-                required 
-                autoComplete="off"
-                style={{
-                  padding: '1rem',
-                  borderRadius: '0.5rem',
-                  border: '1px solid var(--glass-border)',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  color: 'var(--text-primary)',
-                  fontFamily: 'var(--font-mono)',
-                  outline: 'none',
-                  transition: 'border-color 0.3s'
-                }}
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                required
+                autoComplete="name"
+                className="contact-input-field"
                 onFocus={(e) => e.target.style.borderColor = 'var(--accent-purple)'}
                 onBlur={(e) => e.target.style.borderColor = 'var(--glass-border)'}
               />
-              <input 
-                type="email" 
-                name="email" 
-                placeholder="Your Email" 
-                required 
-                autoComplete="off"
-                style={{
-                  padding: '1rem',
-                  borderRadius: '0.5rem',
-                  border: '1px solid var(--glass-border)',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  color: 'var(--text-primary)',
-                  fontFamily: 'var(--font-mono)',
-                  outline: 'none',
-                  transition: 'border-color 0.3s'
-                }}
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                required
+                autoComplete="email"
+                className="contact-input-field"
                 onFocus={(e) => e.target.style.borderColor = 'var(--accent-purple)'}
                 onBlur={(e) => e.target.style.borderColor = 'var(--glass-border)'}
               />
-              <textarea 
-                name="message" 
-                cols="30" 
-                rows="6" 
+              <textarea
+                name="message"
+                cols="30"
+                rows="5"
                 placeholder="Write your message here..."
                 required
+                className="contact-input-field"
                 style={{
-                  padding: '1rem',
-                  borderRadius: '0.5rem',
-                  border: '1px solid var(--glass-border)',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  color: 'var(--text-primary)',
-                  fontFamily: 'var(--font-mono)',
-                  outline: 'none',
-                  resize: 'none',
-                  transition: 'border-color 0.3s'
+                  resize: 'vertical',
+                  minHeight: '120px'
                 }}
                 onFocus={(e) => e.target.style.borderColor = 'var(--accent-purple)'}
                 onBlur={(e) => e.target.style.borderColor = 'var(--glass-border)'}
               ></textarea>
               
-              <button type="submit" className="btn-primary" style={{
-                marginTop: '1rem',
-                fontFamily: 'var(--font-mono)',
-                textTransform: 'uppercase',
-                letterSpacing: '0.1em'
-              }}>
+              <button
+                type="submit"
+                className="btn-primary"
+                style={{
+                  marginTop: '0.5rem',
+                  fontFamily: 'var(--font-mono)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
+                  width: '100%'
+                }}
+              >
                 Submit
               </button>
             </form>

@@ -49,10 +49,12 @@ export default function Projects() {
 
   useEffect(() => {
     const el = sectionRef.current
+    if (!el) return
+
     gsap.fromTo(el.querySelectorAll('.project-card'),
       { y: 50, opacity: 0 },
       {
-        y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: 'power3.out', scrollTrigger: {
+        y: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: 'power3.out', scrollTrigger: {
           trigger: el, start: 'top 75%'
         }
       }
@@ -67,59 +69,96 @@ export default function Projects() {
           <span>My Work</span>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2rem'
-        }}>
+        <div className="projects-grid">
           {projects.map((project, index) => (
-            <div key={index} className="project-card glass-panel" style={{
-              position: 'relative',
-              overflow: 'hidden',
-              borderRadius: '1rem',
-              group: 'project',
-              cursor: 'pointer'
-            }}
-              onMouseOver={(e) => {
-                e.currentTarget.querySelector('.overlay').style.opacity = '1'
-                e.currentTarget.querySelector('img').style.transform = 'scale(1.1)'
+            <div
+              key={index}
+              className="project-card project-card-item glass-panel"
+              onMouseEnter={(e) => {
+                if (window.innerWidth > 768) {
+                  const overlay = e.currentTarget.querySelector('.overlay')
+                  const img = e.currentTarget.querySelector('img')
+                  if (overlay) overlay.style.opacity = '1'
+                  if (img) img.style.transform = 'scale(1.08)'
+                }
               }}
-              onMouseOut={(e) => {
-                e.currentTarget.querySelector('.overlay').style.opacity = '0'
-                e.currentTarget.querySelector('img').style.transform = 'scale(1)'
+              onMouseLeave={(e) => {
+                if (window.innerWidth > 768) {
+                  const overlay = e.currentTarget.querySelector('.overlay')
+                  const img = e.currentTarget.querySelector('img')
+                  if (overlay) overlay.style.opacity = '0'
+                  if (img) img.style.transform = 'scale(1)'
+                }
               }}
             >
-              <img src={`/img/${project.img}`} alt={project.title} style={{
-                width: '100%',
-                height: '250px',
-                objectFit: 'cover',
-                transition: 'transform 0.5s ease',
-                display: 'block'
-              }} />
+              <img
+                src={`/img/${project.img}`}
+                alt={project.title}
+                loading="lazy"
+              />
 
-              <div className="overlay" style={{
-                position: 'absolute',
-                top: 0, left: 0, width: '100%', height: '100%',
-                background: 'rgba(10, 10, 12, 0.90)',
-                backdropFilter: 'blur(8px)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: '1.5rem',
-                opacity: 0,
-                transition: 'opacity 0.4s ease',
-                textAlign: 'center'
-              }}>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'white' }}>{project.title}</h3>
+              <div
+                className="overlay"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  background: 'rgba(10, 10, 12, 0.92)',
+                  backdropFilter: 'blur(8px)',
+                  WebkitBackdropFilter: 'blur(8px)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: '1.5rem',
+                  opacity: 0,
+                  transition: 'opacity 0.35s ease',
+                  textAlign: 'center'
+                }}
+              >
+                <h3 style={{ fontSize: 'clamp(1.2rem, 3vw, 1.5rem)', marginBottom: '0.5rem', color: 'white', fontWeight: 600 }}>
+                  {project.title}
+                </h3>
                 {project.description && (
-                  <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1rem', lineHeight: '1.4' }}>
+                  <p style={{
+                    fontSize: '0.85rem',
+                    color: 'var(--text-secondary)',
+                    marginBottom: '1rem',
+                    lineHeight: '1.5',
+                    maxWidth: '420px'
+                  }}>
                     {project.description}
                   </p>
                 )}
-                <div style={{ display: 'flex', gap: '1.5rem' }}>
-                  <a href={project.github} target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseOver={e => e.target.style.color = 'var(--accent-purple)'} onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}><FaGithub /></a>
-                  <a href={project.live} target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseOver={e => e.target.style.color = 'var(--accent-blue)'} onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}><FaExternalLinkAlt /></a>
+                <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                  {project.github && project.github !== '#' && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${project.title} GitHub repository`}
+                      style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'color 0.3s' }}
+                      onMouseOver={e => e.currentTarget.style.color = 'var(--accent-purple)'}
+                      onMouseOut={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                    >
+                      <FaGithub />
+                    </a>
+                  )}
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${project.title} Live demo`}
+                      style={{ fontSize: '1.4rem', color: 'var(--text-secondary)', transition: 'color 0.3s' }}
+                      onMouseOver={e => e.currentTarget.style.color = 'var(--accent-blue)'}
+                      onMouseOut={e => e.currentTarget.style.color = 'var(--text-secondary)'}
+                    >
+                      <FaExternalLinkAlt />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

@@ -32,15 +32,13 @@ const projects = [
   },
   {
     title: 'Suvega Now',
-    img: 'work1.jpg',
-    github: '#',
+    img: 'suvega-now.png',
     live: 'https://play.google.com/store/apps/details?id=com.suveganow.android&hl=en-IN',
     description: 'A hyper-local grocery delivery application operating in Lakwa. Managed the complete product lifecycle from software architecture to business operations and local launch.'
   },
   {
     title: 'My converter pro',
-    img: 'work3.jpg',
-    github: '#',
+    img: 'myconverterpro.png',
     live: 'https://myconverterpro.site',
     description: 'A comprehensive, privacy-first web utility for file conversions and data sanitization entirely within the browser. Processes data locally for speed and security.'
   }
@@ -53,9 +51,11 @@ export default function Projects() {
     const el = sectionRef.current
     gsap.fromTo(el.querySelectorAll('.project-card'),
       { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: 'power3.out', scrollTrigger: {
-        trigger: el, start: 'top 75%'
-      }}
+      {
+        y: 0, opacity: 1, duration: 0.8, stagger: 0.2, ease: 'power3.out', scrollTrigger: {
+          trigger: el, start: 'top 75%'
+        }
+      }
     )
   }, [])
 
@@ -80,14 +80,14 @@ export default function Projects() {
               group: 'project',
               cursor: 'pointer'
             }}
-            onMouseOver={(e) => {
-              e.currentTarget.querySelector('.overlay').style.opacity = '1'
-              e.currentTarget.querySelector('img').style.transform = 'scale(1.1)'
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.querySelector('.overlay').style.opacity = '0'
-              e.currentTarget.querySelector('img').style.transform = 'scale(1)'
-            }}
+              onMouseOver={(e) => {
+                e.currentTarget.querySelector('.overlay').style.opacity = '1'
+                e.currentTarget.querySelector('img').style.transform = 'scale(1.1)'
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.querySelector('.overlay').style.opacity = '0'
+                e.currentTarget.querySelector('img').style.transform = 'scale(1)'
+              }}
             >
               <img src={`/img/${project.img}`} alt={project.title} style={{
                 width: '100%',
@@ -96,7 +96,7 @@ export default function Projects() {
                 transition: 'transform 0.5s ease',
                 display: 'block'
               }} />
-              
+
               <div className="overlay" style={{
                 position: 'absolute',
                 top: 0, left: 0, width: '100%', height: '100%',
@@ -118,8 +118,8 @@ export default function Projects() {
                   </p>
                 )}
                 <div style={{ display: 'flex', gap: '1.5rem' }}>
-                  <a href={project.github} target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseOver={e=>e.target.style.color='var(--accent-purple)'} onMouseOut={e=>e.target.style.color='var(--text-secondary)'}><FaGithub /></a>
-                  <a href={project.live} target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseOver={e=>e.target.style.color='var(--accent-blue)'} onMouseOut={e=>e.target.style.color='var(--text-secondary)'}><FaExternalLinkAlt /></a>
+                  <a href={project.github} target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseOver={e => e.target.style.color = 'var(--accent-purple)'} onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}><FaGithub /></a>
+                  <a href={project.live} target="_blank" rel="noreferrer" style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', transition: 'color 0.3s' }} onMouseOver={e => e.target.style.color = 'var(--accent-blue)'} onMouseOut={e => e.target.style.color = 'var(--text-secondary)'}><FaExternalLinkAlt /></a>
                 </div>
               </div>
             </div>
